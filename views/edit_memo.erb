@@ -1,0 +1,23 @@
+<html>
+  <head>
+    <meta charset="UTF-8">
+  </head>
+  <body>
+    <h1>メモアプリ</h1>
+    <h2>編集</h2>
+    <form action="/memos/<%=@id%>" method="POST" name="frm_patch">
+      <div>
+        <textarea name="title" cols="80" rows="2"><%=@memo["title"]%></textarea>
+      </div>
+      </br>
+      <div>
+        <textarea name="content" cols="80" rows="8"><%=@memo["content"]%></textarea>
+      </div>
+      </br>
+      <div>
+        <input type="hidden" name="_method" value="PATCH">
+        <input type="submit" value="変更">
+      </div>
+    </form>
+  </body>
+</html>

@@ -1,0 +1,20 @@
+<html>
+  <head>
+    <meta charset="UTF-8">
+  </head>
+  <body>
+    <h1>メモアプリ</h1>
+    <div>
+      <ul>
+        <% @memos.each do |key, m| %>
+        <li>
+          <a href='memos/<%= key %>'><%= m["title"] %></a>
+        </li>
+        <% end %>
+      </ul>
+    </div>
+    <div>
+      <input type="button" onclick="location.href='memos/new'" value="追加">
+    </div>
+  </body>
+</html>

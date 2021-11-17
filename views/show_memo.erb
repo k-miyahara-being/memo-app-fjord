@@ -1,0 +1,30 @@
+<html>
+  <head>
+    <meta charset="UTF-8">
+  </head>
+  <body>
+    <h1>メモアプリ</h1>
+    </br>
+    <div>
+      <h2><%=@memo["title"]%></h2>
+    </div>  
+    <div>
+      <strong><%=@memo["content"]%></strong>
+    </div>
+    </br>
+    <div>
+      <input type="button" onclick="location.href='/memos/<%=@id%>/edit'" value="変更">
+    </div>
+    </br>
+    <div>
+      <form action="/memos" method="POST" name="frm_delete">    
+        <input type="hidden" name="_method" value="DELETE">
+        <input type="hidden" name="memo_id" value=<%=@id%>>
+        <input type="submit" value="削除">
+      </form> 
+    </div>
+    <div>
+      <a href='/memos'>メモ一覧</a>
+    </div>
+  </body>
+</html>
