@@ -25,7 +25,7 @@ get '/memos/new' do
 end
 
 post '/memos' do
-  File.open('memos.json') { |f| JSON.load(f) }
+  hash = File.open('memos.json') { |f| JSON.load(f) }
   hash[memo_id] = { 'title' => h(params[:title]), 'content' => h(params[:content]) }
   File.open('memos.json', 'w') { |f| JSON.dump(hash, f) }
   @memos = hash
