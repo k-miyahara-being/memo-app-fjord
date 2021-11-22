@@ -10,21 +10,16 @@ helpers do
   end
 end
 
-class Memo
-  def self.read
-    File.open('memos.json') { |f| JSON.load(f) }
-  end
-
-  def self.write(hash)
-    File.open('memos.json', 'w') { |f| JSON.dump(hash, f) }
-  end
+def read_memo
+  File.open('memos.json') { |f| JSON.load(f) }
 end
 
-Memo.write({})
-memo_id = 0
+def write_memo(hash)
+  File.open('memos.json', 'w') { |f| JSON.dump(hash, f) }
+end
 
 get '/memos' do
-  @memos = Memo.read
+  @memos = read_memo
   erb :top_memo
 end
 
@@ -33,42 +28,42 @@ get '/memos/new' do
 end
 
 post '/memos' do
-  hash = Memo.read
-  hash[memo_id] = { 'title' => h(params[:title]), 'content' => h(params[:content]) }
-  Memo.write(hash)
+  hash = read_memo
+  memo_id = Time.now.strftime("%Y%m%d%H%M%S")
+  hash[memo_id] = { 'title' => params[:title], 'content' => params[:content] }
+  write_memo(hash)
   @memos = hash
-  memo_id += 1
   redirect '/memos'
 end
 
 get '/memos/:memo_id' do
-  hash = Memo.read
+  hash = read_memo
   @id = params[:memo_id]
   @memo = hash[@id]
   erb :show_memo
 end
 
 get '/memos/:memo_id/edit' do
-  hash = Memo.read
+  hash = read_memo
   @id = params[:memo_id]
   @memo = hash[@id]
   erb :edit_memo
 end
 
 patch '/memos/:memo_id' do
-  hash = Memo.read
+  hash = read_memo
   @id = params[:memo_id]
-  hash[@id]['title'] = h(params[:title])
-  hash[@id]['content'] = h(params[:content])
-  Memo.write(hash)
+  hash[@id]['title'] = params[:title]
+  hash[@id]['content'] = params[:content]
+  write_memo(hash)
   @memo = hash[@id]
   erb :show_memo
 end
 
 delete '/memos' do
-  hash = Memo.read
+  hash = read_memo
   hash.delete(params[:memo_id])
-  Memo.write(hash)
+  write_memo(hash)
   @memos = hash
   erb :top_memo
 end
