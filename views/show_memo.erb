@@ -1,6 +1,6 @@
 <h2><%= h @memo["title"] %></h2>
 <p><%= h @memo["content"] %></p>
-<a href="/memos/<%= @id %>/edit"><button type="button">変更</button></a>
+<a href="/memos/<%= @id %>/edit">変更</a>
 <form action="/memos" method="POST" name="frm_delete">    
   <input type="hidden" name="_method" value="DELETE">
   <input type="hidden" name="memo_id" value=<%= @id %>>

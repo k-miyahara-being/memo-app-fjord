@@ -1,6 +1,16 @@
 <h2>新規作成</h2>
 <form action="../memos" method="POST">
-  <input type="text" name="title" cols="80" rows="2">
-  <textarea name="content" cols="80" rows="8"></textarea>
+  <div>
+    <label>
+      タイトル
+      <input type="text" name="title">
+    </label>
+  </div>
+  <div>
+    <label>
+      内容
+      <textarea name="content"></textarea>
+    </label>
+  </div>
   <input type="submit" value="保存">
 </form>
