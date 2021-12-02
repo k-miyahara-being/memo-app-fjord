@@ -6,12 +6,7 @@
       <input type="text" name="title" value="<%= h @memo["title"] %>">
     </label>
   </div>
-  <div>
-    <label>
-      内容
-      <textarea name="content"><%= @memo["content"] %></textarea>
-    </label>
-  </div>
+  <%= erb :'content', :locals => {:content => @memo["content"]} %>
   <input type="hidden" name="_method" value="PATCH">
   <input type="submit" value="変更">
 </form>
