@@ -1,0 +1,6 @@
+<h2>編集</h2>
+<form action="/memos/<%= @id %>" method="POST" name="frm_patch">
+  <%= erb :form, locals: {title: @memo["title"], content: @memo["content"]} %>
+  <input type="hidden" name="_method" value="PATCH">
+  <input type="submit" value="変更">
+</form>
