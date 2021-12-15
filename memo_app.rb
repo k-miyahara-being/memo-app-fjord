@@ -19,7 +19,7 @@ class Memo
   end
 
   def self.select_memo(id)
-    CONNECTION.exec("SELECT * FROM memo_table WHERE memoid = '#{id}';")
+    CONNECTION.exec("SELECT * FROM memo_table WHERE memoid = $1;", [id])
   end
 
   def self.write_memo(id, title, content)
@@ -27,11 +27,11 @@ class Memo
   end
 
   def self.edit_memo(id, title, content)
-    CONNECTION.exec("UPDATE memo_table SET ( title, content ) = ( '#{title}', '#{content}' ) WHERE memoid = '#{id}';")
+    CONNECTION.exec("UPDATE memo_table SET ( title, content ) = ( $1, $2 ) WHERE memoid = $3;", [title, content, id])
   end
 
   def self.delete_memo(id)
-    CONNECTION.exec("DELETE FROM memo_table WHERE memoid = '#{id}';")
+    CONNECTION.exec("DELETE FROM memo_table WHERE memoid = $1;", [id])
   end
 end
 
